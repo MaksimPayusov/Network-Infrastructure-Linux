@@ -1,0 +1,30 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+// Ключ для обновления от DHCP-сервера
+include "/etc/bind/dhcp-update.key";
+
+// Прямая зона (имя - IP)
+zone "lab.local" {
+	type master;
+	file "/var/cache/bind/db.lab.local";
+	update-policy {
+		// Разрешаем обновление A и DHCID записей
+		grant dhcp-update-key wildcard *.lab.local. A DHCID;
+	};
+};
+
+// Обратная зона (IP - имя) для сети 10.0.0.0/24
+zone "0.0.10.in-addr.arpa" {
+	type master;
+	file "/var/cache/bind/db.10.0.0";
+	update-policy {
+		// Разрешаем PTR и DHCID
+		grant dhcp-update-key wildcard *.0.0.10.in-addr.arpa. PTR DHCID;
+	};
+};
