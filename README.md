@@ -45,13 +45,13 @@ Ubuntu Server, Oracle VirtualBox, ISC Kea DHCP, BIND9, Prometheus, Grafana, Node
   - `db.10.0.0` — зональный файл для обратного разрешения (PTR-записи)
   - `named.conf.local` — конфигурация зон с политикой обновлений
   - `named.conf.options` — глобальные параметры BIND9
-  - `netplan.yaml` — сетевая конфигурация
+  - `netplan.yaml` — настройка сетевых интерфейсов
   - `prometheus.yml` — правила сбора метрик
   - `prometheus.service`, `grafana.ini` — настройки сервисов мониторинга
   - `node_exporter.service` — экспорт метрик с ВМ2
 
 - `configs/vm3/` — настройки клиентской машины
-  - `netplan.yaml` — интерфейс enp0s9 настроен как DHCP-клиент
+  - `netplan.yaml` — настройка сетевых интерфейсов
   - `node_exporter.service` — экспорт метрик для мониторинга
 
 **scripts/** — скрипты
