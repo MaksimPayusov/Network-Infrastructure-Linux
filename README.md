@@ -8,7 +8,7 @@ Ubuntu Server, Oracle VirtualBox, ISC Kea DHCP, BIND9, Prometheus, Grafana, Node
 
 ## Описание проекта
 
-Данный проект представляет собой учебную сетевую инфраструктуру, развёрнутую на трёх виртуальных машинах под управлением Ubuntu Live Server в среде Oracle VirtualBox.
+Данный проект представляет собой учебную сетевую инфраструктуру, развёрнутую на 3 виртуальных машинах под управлением Ubuntu Live Server в среде Oracle VirtualBox.
 
 ### Основные сервисы
 
