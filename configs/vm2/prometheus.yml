@@ -1,0 +1,48 @@
+# my global config
+
+# Глобальные настройки
+global:
+  scrape_interval: 15s # Как часто опрашивать цели
+  evaluation_interval: 15s # Как долго ждать ответа
+
+# Правила для alerting
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Загрузка правил записи/оповещений
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# Список целей для сбора метрик
+scrape_configs:
+  # Сам Prometheus
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # ВМ2 (само-мониторинг)
+  - job_name: "vm2-services"
+    static_configs:
+      - targets: ["10.0.0.2:9100"]
+        labels:
+          vm: "vm2"
+          role: "services"
+
+  # ВМ1 (шлюз + DHCP)
+  - job_name: "vm1-gateway"
+    static_configs:
+      - targets: ["10.0.0.1:9100"]
+        labels:
+          vm: "vm1"
+          role: "gateway"
+
+  # ВМ3 (клиент): пока статически
+  - job_name: "vm3-client"
+    static_configs:
+      - targets: ["10.0.0.100:9100"]
+        labels:
+          vm: "vm3"
+          role: "client"

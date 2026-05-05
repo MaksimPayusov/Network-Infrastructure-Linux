@@ -1,0 +1,36 @@
+# /etc/systemd/system/prometheus.service
+[Unit]
+Description=Prometheus Monitoring Server
+Documentation=https://prometheus.io/docs/introduction/overview/
+# Запускать после сети и файловых систем
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+
+# Команда запуска:
+# --config.file — путь к конфигу
+# --storage.tsdb.path — где хранить данные (временные ряды)
+# --storage.tsdb.retention.time — сколько хранить (15 дней)
+# --web.listen-address — на каком интерфейсе/порту слушать
+# --web.enable-lifecycle — разрешить /-/reload через HTTP (для обновления конфига без перезапуска)
+ExecStart=/usr/local/bin/prometheus \
+  --config.file=/etc/prometheus/prometheus.yml \
+  --storage.tsdb.path=/var/lib/prometheus/data \
+  --storage.tsdb.retention.time=15d \
+  --web.listen-address=0.0.0.0:9090 \
+  --web.enable-lifecycle
+
+# Перезапуск при падении
+Restart=on-failure
+RestartSec=5s
+
+# Лимиты ресурсов
+LimitNOFILE=65536
+
+[Install]
+# Запускать при целевом состоянии multi-user
+WantedBy=multi-user.target
