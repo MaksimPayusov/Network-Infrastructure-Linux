@@ -1,4 +1,3 @@
-# /etc/systemd/system/prometheus.service
 [Unit]
 Description=Prometheus Monitoring Server
 Documentation=https://prometheus.io/docs/introduction/overview/
@@ -12,11 +11,6 @@ Group=prometheus
 Type=simple
 
 # Команда запуска:
-# --config.file — путь к конфигу
-# --storage.tsdb.path — где хранить данные (временные ряды)
-# --storage.tsdb.retention.time — сколько хранить (15 дней)
-# --web.listen-address — на каком интерфейсе/порту слушать
-# --web.enable-lifecycle — разрешить /-/reload через HTTP (для обновления конфига без перезапуска)
 ExecStart=/usr/local/bin/prometheus \
   --config.file=/etc/prometheus/prometheus.yml \
   --storage.tsdb.path=/var/lib/prometheus/data \
